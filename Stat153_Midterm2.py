@@ -16,9 +16,6 @@ import sys
 df = pd.read_csv('q1_train.csv')
 df.Date = pd.to_datetime(df.Date)
 df.set_index("Date", inplace=True)
-plt.plot(df)
-plt.title("Original Data")
-plt.show()
 
 def test_stationarity(timeseries):
 
@@ -69,27 +66,11 @@ def plot_cf(ts,field):
     plt.title('Partial Autocorrelation Function')
     plt.show()
 
-plot_cf(df_diff_3,df_diff_3.activity)
+p,q = 0,2
 
-# Find the (p,q) pair that minimizes the Akaike Information Criterion.
-# The possible range will be [0,10] for both p and q (this is manually set).
-# min_val = sys.maxsize
-# p,q = None,None
-# for i in range(6):
-#     for j in range(6):
-#         try:
-#             new_aic = ARIMA(df_diff,order=(i,1,j)).fit(disp=-1).aic
-#         except ValueError as e:
-#             continue
-#         if new_aic < min_val:
-#             p,q = i,j
-
-
-
-# p,q = 0,2
-#
-# arma_fit = SARIMAX(df,order=(p,1,q),seasonal_order=(1,1,1,52)).fit(disp=-1)
-# prediction = arma_fit.predict(start=525,end=525+103,dynamic=True)
-# plt.plot(df)
-# plt.plot(prediction)
-# plt.show()
+arma_fit = SARIMAX(df,order=(p,1,q),seasonal_order=(1,1,1,52)).fit(disp=-1)
+prediction = arma_fit.predict(start=525,end=525+103,dynamic=True)
+plt.plot(df,color='blue')
+plt.plot(prediction,color='red')
+plt.title("Original Data with Predictions for Two Years")
+plt.show()
