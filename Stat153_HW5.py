@@ -9,21 +9,21 @@ def q2():
     f1 = lambda x: sin(pi*(x**2)/256)
     pts_1 = [f1(i) for i in range(128)]
     # DFT of the points:
-    dft_subset_1 = np.fft.fft(pts)[:64]
+    dft_subset_1 = np.fft.fft(pts_1)[:64]
     # Magnitudes of DFTs:
-    mags_1 = [np.absolute(x) for x in dft_subset]
+    mags_1 = [np.absolute(x) for x in dft_subset_1]
 
     # Same thing for sine function with 512 in denominator:
     f2 = lambda x: sin(pi*(x**2)/512)
-    pts_2 = [f1(i) for i in range(128)]
-    dft_subset_2 = np.fft.fft(pts)[:64]
-    mags_2 = [np.absolute(x) for x in dft_subset]
+    pts_2 = [f2(i) for i in range(128)]
+    dft_subset_2 = np.fft.fft(pts_2)[:64]
+    mags_2 = [np.absolute(x) for x in dft_subset_2]
 
     # Same thing for sine function with 1024 in denominator:
     f3 = lambda x: sin(pi*(x**2)/1024)
-    pts_3 = [f1(i) for i in range(128)]
-    dft_subset_3 = np.fft.fft(pts)[:64]
-    mags_3 = [np.absolute(x) for x in dft_subset]
+    pts_3 = [f3(i) for i in range(128)]
+    dft_subset_3 = np.fft.fft(pts_3)[:64]
+    mags_3 = [np.absolute(x) for x in dft_subset_3]
 
     plt.plot(pts_1)
     plt.title("Time Domain Plot")
@@ -43,3 +43,5 @@ def q2():
     plt.plot(mags_3)
     plt.title("Frequency Domain Magnitudes")
     plt.show()
+
+    \usepackage{graphicx}
