@@ -1,6 +1,7 @@
 import numpy as np
 import scipy
 from math import *
+from cmath import exp as c_exp
 import matplotlib.pyplot as plt
 
 def q2():
@@ -44,4 +45,14 @@ def q2():
     plt.title("Frequency Domain Magnitudes")
     plt.show()
 
-    \usepackage{graphicx}
+def q4():
+    # f = lambda x: (1-.9*cos(24*pi*x)-0.5*cos(2*pi*x)+0.045*cos(26*pi*x))**2+ \
+    #               (.9*sin(24*pi*x)+0.5*sin(2*pi*x)-0.045*sin(26*pi*x))**2
+    f = lambda x: (1-0.9*c_exp(-24j*pi*x)-0.5*c_exp(-2j*pi*x)+\
+                   0.045*c_exp(-26j*pi*x))**2
+    g = lambda y: 1 / np.absolute(f(y))
+    pts = [g(i) for i in np.linspace(-.5,.5,128)]
+    print(pts)
+    plt.plot(np.linspace(-.5,.5,128),pts)
+    plt.title("Spectral Density Q4PB")
+    plt.show()
